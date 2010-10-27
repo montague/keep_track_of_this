@@ -10,11 +10,14 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email
+  attr_accessible :email, :uuid
 
   email_regex = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i
   
   validates :email, :presence => true,
                     :format => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
+
+  validates :uuid,  :presence => true,
+                    :uniqueness => true
 end
