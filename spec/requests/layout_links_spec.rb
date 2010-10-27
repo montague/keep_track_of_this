@@ -27,6 +27,6 @@ describe "LayoutLinks" do
   end
   
   it "should have the right links on the layout" do
-    #implement this
+     pending "links integration test"
   end
 end
