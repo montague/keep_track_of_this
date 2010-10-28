@@ -9,8 +9,10 @@
 #  updated_at :datetime
 #
 
+require 'digest'
 class User < ActiveRecord::Base
-  attr_accessible :email, :uuid
+  attr_accessor :password
+  attr_accessible :email, :uuid, :password, :password_confirmation
 
   email_regex = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i
   
@@ -20,4 +22,33 @@ class User < ActiveRecord::Base
 
   validates :uuid,  :presence => true,
                     :uniqueness => true
+                    
+  validates :password,  :presence => true,
+                        :confirmation => true,
+                        :length => { :within => 6..40 }
+                        
+  before_save :encrypt_password #Active Record callback
+  
+  #public interface to password authentication
+  def has_password?(submitted_password)
+    encrypted_password == encrypt(submitted_password)
+  end
+  
+  private
+    def encrypt_password
+      if new_record? then self.salt = make_salt end
+      self.encrypted_password = encrypt(self.password)
+    end
+    
+    def encrypt(s)
+      secure_hash("#{self.salt}--#{s}")
+    end
+    
+    def make_salt
+      secure_hash("#{Time.now.utc}--#{self.password}")
+    end
+    
+    def secure_hash(s)
+      Digest::SHA2.hexdigest(s)
+    end
 end
