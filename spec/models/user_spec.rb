@@ -107,6 +107,20 @@ describe User do
         @user.has_password?("blahu").should be_false
       end
     end
+    
+    describe "authentication method" do
+      it "should return nil on bad email/password combo" do
+        User.authenticate(@attr[:email], "blahu").should be_nil
+      end
+      
+      it "should return nil on bad email address" do
+        User.authenticate("blahu@blahu.com", @attr[:password])
+      end
+      
+      it "should return the user object on successful authentication" do
+        User.authenticate(@attr[:email], @attr[:password]).should == @user
+      end
+    end
   end
 
 end

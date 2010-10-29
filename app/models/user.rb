@@ -1,12 +1,15 @@
 # == Schema Information
-# Schema version: 20101027162922
+# Schema version: 20101028111932
 #
 # Table name: users
 #
-#  id         :integer         not null, primary key
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id                 :integer         not null, primary key
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  uuid               :string(255)
+#  encrypted_password :string(255)
+#  salt               :string(255)
 #
 
 require 'digest'
@@ -29,11 +32,17 @@ class User < ActiveRecord::Base
                         
   before_save :encrypt_password #Active Record callback
   
-  #public interface to password authentication
+  
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
   
+  #begin class methods
+  def User.authenticate(email,password)
+    u = find_by_email(email)
+    u && u.has_password?(password) ? u : nil
+  end
+  #end class methods
   private
     def encrypt_password
       if new_record? then self.salt = make_salt end
