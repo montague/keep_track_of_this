@@ -1,4 +1,6 @@
 KeepTrackOfThis::Application.routes.draw do
+  match '/users/new', :to => redirect('/signup'), :via => [:get]
+  
   resources :users
   
   root :to => 'pages#home'
