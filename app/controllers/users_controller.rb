@@ -19,7 +19,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.uuid = UUID.new.generate
     if @user.save
-      #stuff
+      flash[:success] = "your account has been created"
+      redirect_to @user
     else
       @title =  Sign_up_title
       @user.password = ""

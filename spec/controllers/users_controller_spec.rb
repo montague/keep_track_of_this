@@ -51,6 +51,11 @@ describe UsersController do
         post :create, :user => @attr
         response.should redirect_to(user_path(assigns(:user)))
       end
+      
+      it "should have a welcome message" do
+        post :create, :user => @attr
+        flash[:success].should =~ /your account has been created/i
+      end
     end
     
     describe "failure" do
