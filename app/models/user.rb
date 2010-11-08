@@ -42,6 +42,11 @@ class User < ActiveRecord::Base
     u = find_by_email(email)
     u && u.has_password?(password) ? u : nil
   end
+  
+  def User.authenticate_with_salt(id, cookie_salt)
+    u = find_by_id(id)
+    (u && (u.salt == cookie_salt)) ? u : nil
+  end
   #end class methods
   private
     def encrypt_password
