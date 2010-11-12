@@ -1,5 +1,9 @@
-<h1>Sign up</h1>
-
+<div style="margin-bottom:4px;">
+	<h1 style="display:inline;margin-right:4px;">Sign up</h1>
+	<span>
+		(or <%= link_to "sign in", signin_path %>)
+	</span>
+</div>
 <%= form_for(@user) do |f| %>
 	<%= render 'shared/error_messages' %>
 	<div class="field">
