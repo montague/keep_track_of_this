@@ -8,9 +8,9 @@ describe "Users" do
       it "should make a new user" do
         lambda do
           visit signup_path
-          fill_in "Email",        :with => "user@example.com"
-          fill_in "Password",     :with => "foobar"
-          fill_in "Confirmation", :with => "foobar"
+          fill_in "Email",            :with => "user@example.com"
+          fill_in "Password",         :with => "foobar"
+          fill_in "Confirm password", :with => "foobar"
           click_button
           response.should have_selector("div.flash.success",
           :content => "your account has been created")
@@ -24,9 +24,9 @@ describe "Users" do
       it "should not make a new user" do
         lambda do        
           visit signup_path
-          fill_in "Email",        :with => ""
-          fill_in "Password",     :with => ""
-          fill_in "Confirmation", :with => ""
+          fill_in "Email",            :with => ""
+          fill_in "Password",         :with => ""
+          fill_in "Confirm password", :with => ""
           click_button
           response.should render_template('users/new')
           response.should have_selector('div#error_explanation')
