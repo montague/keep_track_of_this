@@ -1,5 +1,17 @@
 module SessionsHelper
   USE_SESSION = true
+  
+  #:success, :error, :notice are all blueprint.css styles
+  
+  def deny_access
+    flash[:notice] = "Please sign in to access this page."
+    redirect_to signin_path
+  end
+  
+  def current_user?(user)
+    user == current_user
+  end
+  
   def sign_in(u)
     if USE_SESSION
       session[:remember_token] = [u.id, u.salt]

@@ -1,19 +1,36 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :correct_user, :only => [:edit, :update]
+  
   Sign_up_title = "Sign up"
 
   def new
     @title = Sign_up_title
     @user = User.new
   end
-  
+
   def show
     @title = "My Account"
     @user = User.find(params[:id])
   end
 
   def index
-      redirect_to :action => 'new'
+    redirect_to :action => 'new'
+  end
+
+  def edit
+    @title = "Edit user"
+  end
+
+  def update
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Profile updated."
+      redirect_to @user
+    else
+      @title = "Edit user"
+      render 'edit'
     end
+  end
 
   def create
     @user = User.new(params[:user])
@@ -29,5 +46,16 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+
+  private
+  
+    def authenticate
+      deny_access unless signed_in?
+    end
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
 
 end

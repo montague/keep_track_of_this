@@ -1,0 +1,26 @@
+<h1>Edit user</h1>
+<div>
+	<ul>
+		<li>
+			<strong>eventually, you'll be able to manage your tags and stuff here</strong>
+		</li>
+	</ul>
+</div>
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :email %>&nbsp;(careful--this is your login name, too)<br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirmation" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
