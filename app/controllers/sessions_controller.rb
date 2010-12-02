@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     else
       #log the motherfucker in
       sign_in user
-      redirect_to user
+      redirect_back_or user
     end
   end
 
