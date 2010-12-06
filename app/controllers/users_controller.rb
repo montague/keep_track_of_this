@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :authenticate, :only => [:index, :edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
   
   Sign_up_title = "Sign up"
@@ -10,12 +10,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @title = "My Account"
     @user = User.find(params[:id])
+    @title = @user.nil? ? "My Account" : @user.email
   end
 
   def index
-    redirect_to :action => 'new'
+    @title = "All users"
+    @users = User.paginate(:page => params[:page])
   end
 
   def edit

@@ -35,4 +35,10 @@ RSpec.configure do |config|
     fill_in :password,  :with => user.password
     click_button
   end
+  
+  G = UUID.new
+  
+  def new_guid
+    G.generate
+  end
 end
