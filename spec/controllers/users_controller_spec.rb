@@ -17,13 +17,16 @@ describe UsersController do
       before(:each) do
         @user = test_sign_in(Factory(:user)) #this is our guy
         #these are test users
-        guid = UUID.new
         second = Factory(:user, :email => "burt@example.com",
                                 :uuid => new_guid)
         third = Factory(:user,  :email => "ernie@example.com",
                                 :uuid => new_guid)
         
         @users = [@user, second, third]
+        30.times do
+          @users << Factory(:user,  :email => Factory.next(:email),
+                                    :uuid => new_guid)
+        end
       end
       
       it "should be successful" do
@@ -38,9 +41,19 @@ describe UsersController do
       
       it "should have an element for each user" do
         get :index
-        @users.each do |user| #want to make sure each user is displayed...
+        @users[0..2].each do |user| #want to make sure each user is displayed...
           response.should have_selector("li", :content => user.email)
         end
+      end
+      
+      it "should paginate users" do
+        get :index
+        response.should have_selector("div.pagination")
+        response.should have_selector("span.disabled", :content => "Previous")
+        response.should have_selector("a",  :href => "/users?page=2",
+                                            :content => "2")
+        response.should have_selector("a",  :href => "/users?page=2",
+                                              :content => "Next")
       end
     end
   end #=> end GET 'index'

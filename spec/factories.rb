@@ -4,3 +4,8 @@ Factory.define :user do |user|
   user.password              "foobar"
   user.password_confirmation "foobar"
 end
+
+#define a sequence for generating emails to test pagination
+Factory.sequence :email do |n| 
+  "person-#{n}@example.com" 
+end
