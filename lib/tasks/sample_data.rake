@@ -5,10 +5,12 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     guid = UUID.new
-    User.create!( :email => "ian.asaff@gmail.com",
+    admin = User.create!( :email => "ian.asaff@gmail.com",
                   :uuid => guid.generate,
                   :password => "foobar",
                   :password_confirmation => "foobar")
+    admin.toggle!(:admin)
+    
     99.times do |n|
       email = "example-#{n+1}@railstutorial.org"
       password = "password"
