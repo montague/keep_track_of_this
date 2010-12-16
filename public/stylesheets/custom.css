@@ -25,7 +25,10 @@ section {
 section h1 {
   font-size: 200%;
 }
-
+h1.inline {
+	display: inline;
+	margin-right: 4px;
+}
 /* Links */
 
 a {

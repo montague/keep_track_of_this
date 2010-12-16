@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   Sign_up_title = "Sign up"
 
   def new
+    redirect_to users_path if signed_in?
     @title = Sign_up_title
     @user = User.new
   end
@@ -35,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    redirect_to users_path if signed_in?
     @user = User.new(params[:user])
     @user.uuid = UUID.new.generate
     if @user.save
@@ -50,7 +52,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    id = params[:id]
+    User.find(id).destroy if id != current_user.id
     flash[:success] = "User destroyed."
     redirect_to users_path
   end

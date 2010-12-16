@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
   Sign_in_title = "Sign in"
   def new
+    redirect_to users_path if signed_in?
     @title = Sign_in_title
   end
 
   def create
+    redirect_to users_path if signed_in?
     user = User.authenticate(params[:session][:email],
                           params[:session][:password])
     if user.nil?

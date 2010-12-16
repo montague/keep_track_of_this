@@ -1,23 +1,11 @@
 <div style="margin-bottom:4px;">
-	<h1 style="display:inline;margin-right:4px;">Sign up</h1>
+	<h1 class="inline">Sign up</h1>
 	<span>
 		(or <%= link_to "sign in", signin_path %>)
 	</span>
 </div>
 <%= form_for(@user) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-		<%= f.label :email %><br />
-		<%= f.text_field :email %>
-	</div>
-	<div class="field">
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation, "Confirm password" %><br />
-		<%= f.password_field :password_confirmation %>
-	</div>
+	<%= render 'fields', :f => f %>
 	<div class="actions">
 		<%= f.submit "Sign up" %>
 	</div>

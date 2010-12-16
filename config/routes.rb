@@ -5,7 +5,8 @@ KeepTrackOfThis::Application.routes.draw do
   
   resources :users
   
-  root :to => 'users#new'
+  #root :to => 'users#index'
+  root :to => 'sessions#new'
   #root :to => 'pages#home'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'

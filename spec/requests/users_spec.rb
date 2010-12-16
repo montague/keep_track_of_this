@@ -54,4 +54,17 @@ describe "Users" do
       end
     end
   end
+
+  describe "controlled navigation" do
+    
+    describe "signed in user" do
+      it 'should be redirected to users when clicking "Home"' do
+        user = Factory(:user)
+        integration_sign_in(user)
+        controller.should be_signed_in
+        click_link "Home"
+        response.should have_selector("title", :content => "All users")
+      end
+    end
+  end
 end

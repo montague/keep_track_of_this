@@ -11,7 +11,6 @@ describe UsersController do
     
     describe "as a non-signed-in user" do
       it "should deny access" do
-        puts "user #{@user}"
         delete :destroy, :id => @user
         response.should redirect_to(signin_path)
       end
@@ -29,6 +28,12 @@ describe UsersController do
         lambda do
           delete :destroy, :id => @user
         end.should change(User, :count).by(-1)
+      end
+      
+      it "should not allow an admin to destroy himself" do
+        lambda do
+          delete :destroy, :id => controller.current_user.id
+        end.should_not change(User, :count)
       end
       
       it "should redirect to the users page" do
@@ -89,6 +94,17 @@ describe UsersController do
                                             :content => "2")
         response.should have_selector("a",  :href => "/users?page=2",
                                               :content => "Next")
+      end
+      
+      it "should not have delete links for non-admin users" do
+        get :index
+        response.should_not have_selector("a",  :content => "delete")
+      end
+      
+      it "should have delete links for admin users" do
+        @user.toggle!(:admin)
+        get :index
+        response.should have_selector("a",  :content => "delete")
       end
     end
   end #=> end GET 'index'
