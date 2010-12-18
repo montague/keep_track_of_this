@@ -143,4 +143,21 @@ describe User do
     end
   end
 
+  describe "item associations" do
+    
+    before(:each) do
+      @user = User.create(@attr)
+      @item1 = Factory(:item, :user => @user, :created_at => 1.day.ago)
+      @item2 = Factory(:item, :user => @user, :created_at => 1.hour.ago)
+    end
+    
+    it "should have an items attribute" do
+      @user.should respond_to(:items)
+    end
+    
+    it "should have the right items in the right order" do
+      @user.items.should == [@item2, @item1]
+    end
+  end
+
 end

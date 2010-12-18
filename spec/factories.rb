@@ -9,3 +9,15 @@ end
 Factory.sequence :email do |n| 
   "person-#{n}@example.com" 
 end
+
+#defines an item that has an association to a user
+Factory.define :item do |item|
+  item.content "dexter is a good television show"
+  item.association :user
+end
+
+#defines a tag that has an association to a user
+Factory.define :tag do |tag|
+  tag.content "things i like"
+  tag.association :item
+end

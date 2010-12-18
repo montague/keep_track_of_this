@@ -16,7 +16,7 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :email, :uuid, :password, :password_confirmation
-
+  has_many :items
   email_regex = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i
   
   validates :email, :presence => true,
