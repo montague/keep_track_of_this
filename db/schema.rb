@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101218224824) do
+ActiveRecord::Schema.define(:version => 20101219140046) do
 
   create_table "items", :force => true do |t|
     t.text     "content",    :limit => 255
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(:version => 20101218224824) do
   end
 
   add_index "items", ["user_id"], :name => "index_items_on_user_id"
+
+  create_table "items_tags", :id => false, :force => true do |t|
+    t.integer "item_id"
+    t.integer "tag_id"
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "name"

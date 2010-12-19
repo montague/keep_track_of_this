@@ -158,6 +158,13 @@ describe User do
     it "should have the right items in the right order" do
       @user.items.should == [@item2, @item1]
     end
+    
+    it "should destroy associated microposts" do
+      @user.destroy
+      [@item1, @item2].each do |item|
+        Item.find_by_id(item.id).should be_nil
+      end
+    end
   end
 
 end

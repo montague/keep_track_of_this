@@ -25,4 +25,15 @@ describe Item do
       @item.user.should == @user
     end
   end
+  
+  describe "validations" do
+    
+    it "should require a user id" do
+      Item.new(@attr).should_not be_valid
+    end
+    
+    it "should require nonblank content" do
+      @user.items.build(:content => "  ").should_not be_valid
+    end
+  end
 end
