@@ -3,3 +3,20 @@
 <p>
 	email: <strong><%= @user.email %></strong>
 </p>
+<table class="profile">
+	<tr>
+		<td class="main">
+			<% unless @user.items.empty? %>
+				<table class="items" summary="User items to keep track of">
+					<%= render @items %>
+				</table>
+				<%= will_paginate @items %>
+			<% end %>
+		</td>
+		<td class="sidebar round" valign="top">
+			<strong>Name</strong> <%= @user.email %> <br />
+			<strong>URL</strong> <%= link_to user_path(@user), @user %><br />
+			<strong>Items</strong> <%= @user.items.count %>
+		</td>
+	</tr>
+</table>

@@ -230,6 +230,14 @@ describe UsersController do
       #assigns(:user) returns the model from the controller
       assigns(:user).should == @user
     end
+    
+    it "should show the user's items to keep track of" do
+      item1 = Factory(:item, :user => @user, :content => "keep going")
+      item2 = Factory(:item, :user => @user, :content => "work hard")
+      get :show, :id => @user
+      response.should have_selector("span.content", :content => item1.content)
+      response.should have_selector("span.content", :content => item2.content)
+    end
   end #=> GET 'show'
 
   describe "GET 'new'" do

@@ -3,6 +3,10 @@ module SessionsHelper
   
   #:success, :error, :notice are all blueprint.css styles
   
+  def authenticate
+    deny_access unless signed_in?
+  end
+  
   def deny_access
     store_location
     flash[:notice] = "Please sign in to access this page."

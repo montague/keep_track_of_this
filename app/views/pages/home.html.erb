@@ -1,4 +1,27 @@
-<h1>Pages#home</h1>
-<p>
-	<%= link_to "Sign up", signup_path %>
-</p>
+<% if signed_in? %>
+  <table class="front" summary="For signed-in users">
+    <tr>
+      <td class="main">
+        <h1 class="item">What's up?</h1>
+        <%= render 'shared/item_form' %>
+      </td>
+      <td class="sidebar round">
+        <%= render 'shared/user_info' %>
+      </td>
+    </tr>
+  </table>
+<% else %> 
+<%-# 
+	# this will never be hit because we are redirecting in the controller
+	# if the user isn't signed in 
+%>
+  <h1>Sample App</h1>
+
+  <p>
+    This is the home page for the
+    <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+    sample application.
+  </p>
+
+  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% end %>

@@ -4,10 +4,11 @@ KeepTrackOfThis::Application.routes.draw do
   match '/users/new', :to => redirect('/signup'), :via => [:get]
   
   resources :users
+  resources :items, :only => [:create, :destroy]
   
   #root :to => 'users#index'
-  root :to => 'sessions#new'
-  #root :to => 'pages#home'
+  #root :to => 'sessions#new'
+  root :to => 'pages#home'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
