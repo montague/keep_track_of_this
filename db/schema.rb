@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101219140046) do
+ActiveRecord::Schema.define(:version => 20101224115700) do
 
   create_table "items", :force => true do |t|
     t.text     "content",    :limit => 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subject"
   end
 
   add_index "items", ["user_id"], :name => "index_items_on_user_id"

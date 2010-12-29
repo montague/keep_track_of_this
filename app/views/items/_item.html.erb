@@ -1,5 +1,6 @@
 <tr>
 	<td class="item">
+		<span class="subject"><%= item.subject.blank? ? "place holder" : item.subject %></span>
 		<span class="content"><%= item.content %></span>
 		<span class="timestamp">
 			Created <%= time_ago_in_words(item.created_at) %> ago.

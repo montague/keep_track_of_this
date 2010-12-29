@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Item do
   before(:each) do
     @user = Factory(:user)
-    @attr = { :content => "value for content" }
+    @attr = { :content => "value for content", :subject => "value for subject" }
   end
   
   it "should create a new instance given valid attribtues" do
@@ -34,6 +34,10 @@ describe Item do
     
     it "should require nonblank content" do
       @user.items.build(:content => "  ").should_not be_valid
+    end
+    
+    it "should require nonblank subject" do
+      @user.items.build(:subject => "  ").should_not be_valid
     end
   end
 end

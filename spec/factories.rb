@@ -13,6 +13,7 @@ end
 #defines an item that has an association to a user
 Factory.define :item do |item|
   item.content "dexter is a good television show"
+  item.subject "dexter"
   item.association :user
 end
 

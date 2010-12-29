@@ -63,7 +63,7 @@ describe "Users" do
         integration_sign_in(user)
         controller.should be_signed_in
         click_link "Home"
-        response.should have_selector("title", :content => "All users")
+        response.should have_selector("title", :content => "Home")
       end
     end
   end

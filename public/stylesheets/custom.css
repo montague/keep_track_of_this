@@ -183,6 +183,18 @@ table.items tr td.item span.timestamp {
   color: #666;
 }
 
+table.items tr td.item span.content {
+  display: block;
+  /*font-size: 85%;
+    color: #666;*/
+}
+
+table.items tr td.item span.subject {
+  display: block;
+/*  font-size: 85%;
+  color: #666;
+*/}
+
 div.user_info img {
   padding-right: 0.1em;
 }
@@ -206,4 +218,9 @@ form.new_item {
 form.new_item textarea {
   height: 4em;
   margin-bottom: 0;
+/*  width: 300px;*/
+}
+
+form input.subject_input {
+	width: 390px;
 }

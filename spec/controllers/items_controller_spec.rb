@@ -43,7 +43,7 @@ describe ItemsController do
     describe "success" do
 
       before(:each) do
-        @attr = { :content => "Lorem ipsum" }
+        @attr = { :content => "Lorem ipsum", :subject => "blahu" }
       end
 
       it "should create an item" do
