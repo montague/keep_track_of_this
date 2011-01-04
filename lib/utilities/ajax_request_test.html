@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<title>ajax_request_test</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('#btn_submit').click(function(){
+			var f = $('#the_form').serialize();
+			alert(f);
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="content">
+		<form id="the_form" action="" method="get" accept-charset="utf-8">
+			<input type="hidden" name="uuid" value="" id="uuid"/>
+			<label for="username">User ID:</label>&nbsp;
+			<input type="text" name="username" id="username"/>
+			<br />
+			<br />
+			<label for="item_subject">Item Subject:</label>&nbsp;
+			<input type="text" name="item_subject" id="item_subject"/>
+			<br />
+			<br />
+			<label for="item_content">Item Content:</label>&nbsp;
+			<input type="text" name="item_content" id="item_content"/>
+			<br />
+			<br />
+			<button id="btn_submit">submit</button>
+		</form>
+	</div>
+</body>
+</html>
