@@ -1,5 +1,5 @@
 class RemoteController < ApplicationController
-  
+
   #get
   def show
     u = User.find_by_uuid(request[:uuid])
@@ -23,8 +23,9 @@ class RemoteController < ApplicationController
     render :text => "hi mom!!"
   end
 
-  # def bootstrap
-  #     headers['Content-type'] = 'text/javascript'
-  #     render :file => "#{RAILS_ROOT}/public/javascripts/ktot_bootstrap.js?#{Time.now.strftime('%s%L')}"
-  #   end
+  def bootstrap
+    #headers['Content-type'] = 'text/javascript'
+    render :js => '(function(){alert("loaded")})();'
+    #render :file => "#{RAILS_ROOT}/public/javascripts/ktot_bootstrap.js?#{Time.now.strftime('%s%L')}"
   end
+end
