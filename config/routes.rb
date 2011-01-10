@@ -17,8 +17,9 @@ KeepTrackOfThis::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
 
   #api stuff
-  match '/remote', :to => 'remote#home'
-
+  match '/remote', :to => 'remote#show', :via => [:get]
+  match '/remote', :to => 'remote#create', :via => [:post]
+  #match '/bootstrap', :to => 'remote#bootstrap', :via => [:get]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

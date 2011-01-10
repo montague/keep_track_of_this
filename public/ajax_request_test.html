@@ -6,16 +6,28 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(function(){
-		$('#btn_submit').click(function(){
-			var f = $('#the_form').serialize();
-			alert(f);
+		$('#sanity').text("we're good.");
+		var handler = function(data, status){
+			$('#status').text(status);
+			$(data).each(function(i){
+				alert('item_' + i + ': ' + data[i].subject + ' | ' + data[i].content);
+			});
+		};
+		var _uuid = '040e42c0-ee57-012d-c8ac-001cb3ff73e3';
+		var url = '/remote';
+		$('#btn_get').click(function(){
+			//var f = $('#the_form').serialize();
+			$.getJSON(url, {uuid: _uuid}, function(data, status){
+				handler(data,status);
+			});
 		});
 	});
 	</script>
 </head>
 <body>
 	<div id="content">
-		<form id="the_form" action="" method="get" accept-charset="utf-8">
+		<div id="sanity"></div>
+		<!-- <form id="the_form" action="" method="get" accept-charset="utf-8"> -->
 			<input type="hidden" name="uuid" value="" id="uuid"/>
 			<label for="username">User ID:</label>&nbsp;
 			<input type="text" name="username" id="username"/>
@@ -29,8 +41,19 @@
 			<input type="text" name="item_content" id="item_content"/>
 			<br />
 			<br />
-			<button id="btn_submit">submit</button>
-		</form>
+			<table>
+				<tr>
+					<td>
+						<button id="btn_get">get</button>
+					</td>
+					<td>
+						<button id="btn_post">post</button>
+					</td>
+				</tr>
+			</table>
+		<!-- </form> -->
+		<div id="status"></div>
+		<div id="data"></div>
 	</div>
 </body>
 </html>
