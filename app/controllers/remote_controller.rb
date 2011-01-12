@@ -24,8 +24,6 @@ class RemoteController < ApplicationController
   end
 
   def bootstrap
-    #headers['Content-type'] = 'text/javascript'
-    render :js => '(function(){alert("loaded")})();'
-    #render :file => "#{RAILS_ROOT}/public/javascripts/ktot_bootstrap.js?#{Time.now.strftime('%s%L')}"
+    send_file 'public/javascripts/ktt_bootstrap.js', :type => 'application/javascript; charset=utf-8'
   end
 end
