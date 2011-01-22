@@ -190,7 +190,8 @@ table.items tr td.item span.content {
 }
 
 table.items tr td.item span.subject {
-  display: block;
+  	display: block;
+	font-weight: bold;
 /*  font-size: 85%;
   color: #666;
 */}

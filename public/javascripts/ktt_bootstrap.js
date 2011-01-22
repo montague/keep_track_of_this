@@ -35,9 +35,11 @@ window._ktt = (function () {
 								,'&c=', encodeURIComponent($c.val())
 								].join('');
 					console && console.log(url);
-					new Image().src = url;
-					$s.val('');
-					$c.val('');
+					if(jQuery.trim($s.val()).length > 0 || jQuery.trim($c.val()).length > 0){
+						new Image().src = url;
+						$s.val('');
+						$c.val('');
+					}
 					jQuery('#ktt_container').fadeOut();
 				});
 			
@@ -67,7 +69,7 @@ window._ktt = (function () {
 				,'</div>'
 				].join('')).css({
 					position: 'fixed'
-					,height: '360px'
+					,height: '400px'
 					,width: '310px'
 					,'margin-left': '-110px'
 					,top: '0px'
@@ -77,6 +79,7 @@ window._ktt = (function () {
 					,'font-size': '12px'
 					,color: '#222'
 					,'background-color': '#EEE'
+					,border: '1px solid black'
 				})
 				.append(saveBtn)
 				.prepend(closeX);
