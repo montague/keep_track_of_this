@@ -5,7 +5,7 @@ window._ktt = (function () {
 			,head = document.getElementsByTagName('head')[0]
 			,done = false;
 			script.src = url;
-			//google "jquerify bookmarklet" for inspiration
+			//google "jquerify bookmarklet" for my inspiration here
 			script.onload = script.onreadystatechange=function(){
 				if(!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')){
 					done = true;
@@ -18,49 +18,77 @@ window._ktt = (function () {
 		};
 	
 		function create_form(){
-			var saveBtn = jQuery('<button id="ktt_save">save</button>').click(function(){
-				//submit and close
-				alert('saving: ' + _ktt_identifier);
-				jQuery('#ktt_container').fadeOut();
-			})
-			.wrap('<div/>');
+			//save button
+			var saveBtn = jQuery('<button>save</button>')
+				.css({
+					float: 'right'
+				})
+				.click(function(){
+					var $s = jQuery('#ktt_s')
+						,$c = jQuery('#ktt_c');
+					var url = [
+								'http://localhost:3000/ktt?'
+								,'u=', _ktt_identifier
+								,'&s=', $s.val()
+								,'&c=', $c.val()
+								].join('');
+					console && console.log(url);
+					new Image().src = url;
+					$s.val('');
+					$c.val('');
+					jQuery('#ktt_container').fadeOut();
+				});
 			
+			//close 
 			var closeX = jQuery('<span id="ktt_close" style="float:right;">X</span>')
-			.click(function(){
-				//just close
-				alert('closing');
-				jQuery('#ktt_container').fadeOut();
-			})
-			.hover(function(){
-				jQuery(this).css('cursor','pointer');
-			},function(){
-				jQuery(this).css('cursor','');
-			});
+				.css({
+					'font-size': '1em'
+					,'color': '#000'
+				})
+				.click(function(){
+					jQuery('#ktt_container').fadeOut();
+				})
+				.hover(function(){
+					jQuery(this).css('cursor','pointer');
+				},function(){
+					jQuery(this).css('cursor','');
+				});
 			
-			//build main conatiner	
-			jQuery([
+			//build main container	
+			var $win = jQuery([
 				'<div id="ktt_container" style="display:none;">'
-					,'subject: <input type="text" name="ktt_subject"/>'
+					,'subject: <br/><input type="text" id="ktt_s"/>'
 					,'<br/><br/>'
 					,'remember this:<br/>'
-					,'<textarea name="ktt_to_remember"></textarea>'							
+					,'<textarea id="ktt_c"></textarea><br/>'							
 				,'</div>'
 				].join('')).css({
 					position: 'fixed'
-					,height: '300px'
+					,height: '350px'
 					//,width: '220px'
 					,'margin-left': '-110px'
 					,top: '0px'
 					,left: '50%'
-					,padding: '5px 10px'
+					,padding: '5px 20px'
 					,'z-index': '1001'
 					,'font-size': '12px'
 					,color: '#222'
-					,'background-color': '#f99'
+					,'background-color': '#EEE'
 				})
 				.append(saveBtn)
-				.prepend(closeX)
-				.appendTo('body');
+				.prepend(closeX);
+			$win.appendTo('body');
+			//styles for inputs
+			jQuery('#ktt_s').css({
+				width: '300px'
+				,height:'20px'
+				,'font-size': '16px'
+			});
+			jQuery('#ktt_c').css({
+				height: '200px'
+				,width: '300px'
+				,'font-size':'16px'
+			})
 		};
 		
 	return {

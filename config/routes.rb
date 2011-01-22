@@ -18,7 +18,7 @@ KeepTrackOfThis::Application.routes.draw do
 
   #api stuff
   match '/remote', :to => 'remote#show', :via => [:get]
-  match '/remote', :to => 'remote#create', :via => [:post]
+  match '/ktt', :to => 'remote#create', :via => [:get]
   match '/bootstrap', :to => 'remote#bootstrap', :via => [:get]
   # The priority is based upon order of creation:
   # first created -> highest priority.

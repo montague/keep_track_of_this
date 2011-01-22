@@ -18,9 +18,14 @@ class RemoteController < ApplicationController
     end
   end
 
-  #post
   def create
-    render :text => "hi mom!!"
+    @u = User.find_by_uuid(request[:u])
+    subject, content = request[:s], request[:c]
+    
+    @i = @u.items.build :subject => subject, :content => content
+    status = @i.save ? 'saved' : 'failed'
+    render 'debug_view'
+    #render :text => "status: #{status}, ---content:|#{content}|, subject:|#{subject}|"
   end
 
   def bootstrap

@@ -11,6 +11,11 @@
 		<td class="main">
 			<% unless @user.items.empty? %>
 				<table class="items" summary="User items to keep track of">
+					<tr>
+						<td>
+							count: <%= @user.items.count %>
+						</td>
+					</tr>
 					<%= render @items %>
 				</table>
 				<%= will_paginate @items %>
