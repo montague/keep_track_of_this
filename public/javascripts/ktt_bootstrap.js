@@ -22,6 +22,8 @@ window._ktt = (function () {
 			var saveBtn = jQuery('<button>save</button>')
 				.css({
 					float: 'right'
+					,width: '50px'
+					,margin: '12px 0px'
 				})
 				.click(function(){
 					var $s = jQuery('#ktt_s')
@@ -29,8 +31,8 @@ window._ktt = (function () {
 					var url = [
 								'http://localhost:3000/ktt?'
 								,'u=', _ktt_identifier
-								,'&s=', $s.val()
-								,'&c=', $c.val()
+								,'&s=', encodeURIComponent($s.val())
+								,'&c=', encodeURIComponent($c.val())
 								].join('');
 					console && console.log(url);
 					new Image().src = url;
@@ -57,6 +59,7 @@ window._ktt = (function () {
 			//build main container	
 			var $win = jQuery([
 				'<div id="ktt_container" style="display:none;">'
+					,'<div style="font-size:16px; margin-bottom: 4px;">keep track of this</div>'
 					,'subject: <br/><input type="text" id="ktt_s"/>'
 					,'<br/><br/>'
 					,'remember this:<br/>'
@@ -64,8 +67,8 @@ window._ktt = (function () {
 				,'</div>'
 				].join('')).css({
 					position: 'fixed'
-					,height: '350px'
-					//,width: '220px'
+					,height: '360px'
+					,width: '310px'
 					,'margin-left': '-110px'
 					,top: '0px'
 					,left: '50%'
@@ -83,11 +86,13 @@ window._ktt = (function () {
 				width: '300px'
 				,height:'20px'
 				,'font-size': '16px'
+				,color: '#000'
 			});
 			jQuery('#ktt_c').css({
 				height: '200px'
 				,width: '300px'
 				,'font-size':'16px'
+				,color: '#000'
 			})
 		};
 		
