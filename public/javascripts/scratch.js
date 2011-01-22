@@ -10,7 +10,7 @@
 */
 
 //so first, inject your script, motherfucker.
-
+//from http://www.learningjquery.com/2006/12/jquerify-bookmarklet
 javascript: (function(){
 	var el=document.createElement('div')
 	,b=document.getElementsByTagName('body')[0];

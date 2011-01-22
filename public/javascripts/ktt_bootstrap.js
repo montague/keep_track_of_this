@@ -5,6 +5,7 @@ window._ktt = (function () {
 			,head = document.getElementsByTagName('head')[0]
 			,done = false;
 			script.src = url;
+			//google "jquerify bookmarklet" for inspiration
 			script.onload = script.onreadystatechange=function(){
 				if(!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')){
 					done = true;
