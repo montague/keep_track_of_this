@@ -35,7 +35,7 @@ window._ktt = (function () {
 								,'&c=', encodeURIComponent($c.val())
 								].join('');
 					console && console.log(url);
-					if(jQuery.trim($s.val()).length > 0 || jQuery.trim($c.val()).length > 0){
+					if(jQuery.trim($s.val()).length > 0){//only require the subject
 						new Image().src = url;
 						$s.val('');
 						$c.val('');
@@ -105,6 +105,7 @@ window._ktt = (function () {
 			make sure we have jquery loaded and available before we start surgery...
 			*/
 			if(typeof jQuery==="undefined"){
+				console && console.log('loading jquery');
 				get_script('http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js', function(){
 					_ktt.show_form();
 				});
