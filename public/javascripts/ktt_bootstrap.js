@@ -120,6 +120,7 @@ window._ktt = (function () {
 				create_form();
 			}
 			jQuery('#ktt_container').fadeIn();
+			jQuery('#ktt_s').focus();
 		}
 
 				

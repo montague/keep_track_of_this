@@ -34,13 +34,25 @@ describe PagesController do
       end
     end
     
-    # describe "for signed-in users" do
-    #       test_sign_in(Factory(:user))
-    #       it "should be successful" do
-    #         get 'bookmarklet'
-    #         response.should be_success
-    #       end
-    #     end
+    describe "for signed-in users" do
+      before(:each) do
+        @user = test_sign_in(Factory(:user))
+      end
+      it "should be successful" do
+        get 'bookmarklet'
+        response.should be_success
+      end
+      
+      it "should have the right title" do
+        get 'bookmarklet'
+        response.should have_selector("title", :content => title("Your Bookmarklet"))
+      end  
+      
+      it "should have the user's uuid embedded in the bookmarklet" do
+        get 'bookmarklet'
+        response.should have_selector("a", :href => "#{controller.get_bookmarklet}")
+      end
+    end
   end
   
 
@@ -64,7 +76,7 @@ describe PagesController do
     
     it "should have the right title" do
       get 'about'
-      response.should have_selector("title", :content => "KeepTrackOfThis.com | About")
+      response.should have_selector("title", :content => title("About"))
     end
   end
 
@@ -76,7 +88,7 @@ describe PagesController do
     
     it "should have the right title" do
       get 'help'
-      response.should have_selector("title", :content => "KeepTrackOfThis.com | Help")
+      response.should have_selector("title", :content => title("Help"))
     end
   end
 

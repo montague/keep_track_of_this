@@ -26,7 +26,14 @@ class PagesController < ApplicationController
     if !signed_in?
       generic_error
       redirect_to '/signin'
+    else
+      @bookmarklet = get_bookmarklet
     end
+  end
+
+  def get_bookmarklet
+    "javascript:(function(){if(window._ktt===undefined){window._ktt_identifier='#{current_user.uuid}';if(console)console.log('requesting boostrap');var s=document.createElement('script'),head=document.getElementsByTagName('head')[0];s.src='#{request.url.gsub!(/bookmarklet/,'bootstrap')}?'+new Date().getTime();head.appendChild(s);}
+      else{if(console)console.log('ktt detected. no request made');window._ktt.go();}})();"
   end
 
   private
