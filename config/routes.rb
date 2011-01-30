@@ -12,6 +12,7 @@ KeepTrackOfThis::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
+  match '/bookmarklet', :to => 'pages#bookmarklet'
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
